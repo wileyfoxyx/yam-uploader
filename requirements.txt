@@ -1,0 +1,2 @@
+yandex-music>=2,<3
+keyring>=24,<26
