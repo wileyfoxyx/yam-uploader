@@ -1,0 +1,74 @@
+name: build
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt pyinstaller
+      - name: Build Windows exe
+        run: |
+          python -m PyInstaller --name YandexMusicUploader --windowed --onefile app/__main__.py
+        env:
+          YM_KEYRING_SERVICE: yandex-music-release-1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: YandexMusicUploader-win
+          path: dist/YandexMusicUploader.exe
+
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt pyinstaller
+      - name: Build macOS app
+        run: |
+          python -m PyInstaller --name YandexMusicUploader --windowed --onefile --osx-bundle-identifier io.github.yandexmusic.uploader app/__main__.py
+        env:
+          YM_KEYRING_SERVICE: yandex-music-release-1
+      - name: Zip .app bundle
+        run: |
+          cd dist
+          /usr/bin/zip -r ../YandexMusicUploader-macos.zip YandexMusicUploader.app
+      - uses: actions/upload-artifact@v4
+        with:
+          name: YandexMusicUploader-macos
+          path: YandexMusicUploader-macos.zip
+
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt pyinstaller
+      - name: Build Linux binary
+        run: |
+          python -m PyInstaller --name YandexMusicUploader --onefile app/__main__.py
+        env:
+          YM_KEYRING_SERVICE: yandex-music-release-1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: YandexMusicUploader-linux
+          path: dist/YandexMusicUploader
