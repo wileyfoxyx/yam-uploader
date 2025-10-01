@@ -1,22 +1,14 @@
-# Yandex Music Uploader GUI
+# Yandex Music Uploader
 
-A simple Tkinter-based GUI to upload a local audio file to one of your Yandex Music playlists.
+A simple Tkinter-based GUI app to upload a local audio file to one of your Yandex Music playlists. Mostly usable as a workaround for uploading tracks to "My Favorites" playlist (since the ability to do so was removed with Yandex Music's new web UI), but it can upload tracks to any of your playlists.
 
-Features:
-
-- Asks for access token on first run and stores it securely in your OS keyring.
-- Fetches and lists your playlists for easy selection.
-- Pick a local audio file and upload it to the selected playlist.
-
-## Downloads (prebuilt)
+## Downloads
 
 Prebuilt binaries are available via GitHub Actions artifacts:
 
 - Windows: YandexMusicUploader.exe
 - macOS: YandexMusicUploader.app (zipped)
 - Linux: YandexMusicUploader (ELF binary)
-
-Open the Actions tab, select the latest "build" workflow run, and download the artifacts for your OS.
 
 ## Requirements
 
@@ -26,19 +18,19 @@ Open the Actions tab, select the latest "build" workflow run, and download the a
 ## Setup
 
 1. Create & activate a virtual environment (recommended).
-2. Install dependencies:
+2. Install dependencies. Below is the example for Windows:
 
 ```powershell
 pip install -r requirements.txt
 ```
 
-## Run
+3. Run:
 
 ```powershell
 python -m app
 ```
 
-On first run you'll be prompted to enter your Yandex Music access token. You can obtain an OAuth token as documented by the `yandex-music` library or via Yandex.
+On first run you'll be prompted to enter your Yandex Music access token. You can learn how to obtain it [here](https://yandex-music.readthedocs.io/en/main/token.html.
 
 ## Build from source
 
