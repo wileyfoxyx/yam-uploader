@@ -30,7 +30,7 @@ pip install -r requirements.txt
 python -m app
 ```
 
-On first run you'll be prompted to enter your Yandex Music access token. You can learn how to obtain it [here](https://yandex-music.readthedocs.io/en/main/token.html.
+On first run you'll be prompted to enter your Yandex Music access token. You can learn how to obtain it [here](https://yandex-music.readthedocs.io/en/main/token.html).
 
 ## Build from source
 
@@ -75,3 +75,4 @@ The binary will appear in `dist/YandexMusicUploader`. Make it executable: `chmod
 
 - The app uses only official endpoints exposed via the `yandex-music` library to read playlists; the file upload uses the handler shown in your snippet.
 - For packaged builds, token is stored in system keyring under service `yandex-music-release-1` (to avoid reusing dev tokens). You can override with env var `YM_KEYRING_SERVICE`.
+
